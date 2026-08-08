@@ -1,0 +1,97 @@
+import type { INodeProperties } from 'n8n-workflow';
+
+export const contactFieldsCollection: INodeProperties = {
+	displayName: 'Fields',
+	name: 'fields',
+	type: 'collection',
+	typeOptions: {
+		multipleValueButtonText: 'Add Field',
+	},
+	default: {},
+	options: [
+		{
+			displayName: 'Custom Contact Info 1',
+			name: 'customContactInfo1',
+			type: 'string',
+			default: '',
+			routing: { send: { type: 'body', property: 'custom_contact_info_1' } },
+		},
+		{
+			displayName: 'Custom Contact Info 2',
+			name: 'customContactInfo2',
+			type: 'string',
+			default: '',
+			routing: { send: { type: 'body', property: 'custom_contact_info_2' } },
+		},
+		{
+			displayName: 'Date of Birth',
+			name: 'dateOfBirth',
+			type: 'dateTime',
+			default: '',
+			routing: { send: { type: 'body', property: 'date_of_birth' } },
+		},
+		{
+			displayName: 'Email',
+			name: 'email',
+			type: 'string',
+			placeholder: 'name@email.com',
+			default: '',
+			routing: { send: { type: 'body', property: 'email' } },
+		},
+		{
+			displayName: 'Family Name',
+			name: 'familyName',
+			type: 'string',
+			default: '',
+			routing: { send: { type: 'body', property: 'family_name' } },
+		},
+		{
+			displayName: 'First Name',
+			name: 'firstName',
+			type: 'string',
+			default: '',
+			routing: { send: { type: 'body', property: 'first_name' } },
+		},
+		{
+			displayName: 'Gender',
+			name: 'gender',
+			type: 'options',
+			options: [
+				{ name: 'Unset', value: 0 },
+				{ name: 'Female', value: 1 },
+				{ name: 'Male', value: 2 },
+			],
+			default: 0,
+			routing: { send: { type: 'body', property: 'gender' } },
+		},
+		{
+			displayName: 'Identifier',
+			name: 'identifier',
+			type: 'string',
+			default: '',
+			description: 'External identifier for the contact, e.g. a CRM record ID',
+			routing: { send: { type: 'body', property: 'identifier' } },
+		},
+		{
+			displayName: 'Licence Number',
+			name: 'licenceNumber',
+			type: 'string',
+			default: '',
+			routing: { send: { type: 'body', property: 'licence_number' } },
+		},
+		{
+			displayName: 'Passport Number',
+			name: 'passportNumber',
+			type: 'string',
+			default: '',
+			routing: { send: { type: 'body', property: 'passport_number' } },
+		},
+		{
+			displayName: 'Phone',
+			name: 'phone',
+			type: 'string',
+			default: '',
+			routing: { send: { type: 'body', property: 'phone' } },
+		},
+	],
+};

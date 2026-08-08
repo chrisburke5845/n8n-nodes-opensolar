@@ -1,0 +1,36 @@
+# Overview
+
+- Orgs
+  - (Customer Data)
+    - Projects
+      - Systems
+      - Assigned Contacts (Contact)
+      - Assigned Team Member (Role)
+      - Assigned Site Inspector (Role)
+      - Assigned Installer (Role)
+      - Private Files
+      - Current Utility Tariff (link to UtilityTariff or custom)
+      - Proposed Utility Tariff (link to UtilityTariff or custom)
+      - Events
+    - Contacts
+    - Systems
+    - Roles
+  - (Configuration)
+    - Team (Role)
+    - Org Settings / API Keys
+    - Pricing Schemes
+    - Payment Options
+    - Costings
+    - Setbacks & Design Settings
+    - Component Activations
+      - Modules (link to Component Database or custom)
+      - Inverters (link to Component Database or custom)
+      - Batteries (link to Component Database or custom)
+      - Others (link to Component Database or custom)
+    - Incentives
+    - Document Templates
+    - Lead Capture Forms
+    - Public Files
+    - Utility Tariffs (private)
+- Event Types
+- Roof Types

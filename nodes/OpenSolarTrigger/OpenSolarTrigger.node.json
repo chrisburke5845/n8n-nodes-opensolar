@@ -1,0 +1,18 @@
+{
+	"node": "n8n-nodes-opensolar-trigger",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Sales", "Development"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://developers.opensolar.com/api/"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://developers.opensolar.com/api/webhooks"
+			}
+		]
+	}
+}
