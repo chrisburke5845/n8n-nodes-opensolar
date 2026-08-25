@@ -58,19 +58,42 @@ export function buildComponentActivationDescription(
 		description: `The ID of the ${config.resourceLabel.toLowerCase()} activation`,
 	};
 
-	const buildFieldsCollection = (show: { resource: string[]; operation: string[] }): INodeProperties => {
+		// Top-level field, NOT inside the Fields collection. `required: true` on an
+	// option nested inside a `type: 'collection'` gets checked by n8n regardless of
+	// the collection's own displayOptions (unlike `fixedCollection`), so it must
+	// live here to be scoped correctly to Create only.
+	const catalogRefField: INodeProperties = {
+		displayName: config.catalogFieldLabel,
+		name: 'catalogRef',
+		type: 'string',
+		default: '',
+		required: config.catalogFieldRequired,
+		description: `URL reference to the catalog ${config.resourceLabel.toLowerCase()}, from the OpenSolar component database`,
+		displayOptions: { show: showOnlyForCreate },
+		routing: { send: { type: 'body', property: config.catalogFieldName } },
+	};
+
+	// Non-required copy for the Update collection — PATCH fields are optional by
+	// nature, and this can't clash with catalogRefField above since it only shows
+	// under operation: update.
+	const updateCatalogRefOption: NonNullable<INodeProperties['options']>[number] = {
+		displayName: config.catalogFieldLabel,
+		name: 'catalogRef',
+		type: 'string',
+		default: '',
+		description: `URL reference to the catalog ${config.resourceLabel.toLowerCase()}, from the OpenSolar component database`,
+		routing: { send: { type: 'body', property: config.catalogFieldName } },
+	};
+
+	const buildFieldsCollection = (
+		show: { resource: string[]; operation: string[] },
+		includeCatalogRef: boolean,
+	): INodeProperties => {
 		// Options are sorted by displayName below since the catalog reference field's
 		// label (and therefore its correct alphabetical position) varies per resource.
 		const options: NonNullable<INodeProperties['options']> = [
-			{
-				displayName: config.catalogFieldLabel,
-				name: 'catalogRef',
-				type: 'string',
-				default: '',
-				required: config.catalogFieldRequired,
-				description: `URL reference to the catalog ${config.resourceLabel.toLowerCase()}, from the OpenSolar component database`,
-				routing: { send: { type: 'body', property: config.catalogFieldName } },
-			},
+			...(includeCatalogRef ? [updateCatalogRefOption] : []),
+			
 			{
 				displayName: 'Cost',
 				name: 'cost',
@@ -224,8 +247,9 @@ export function buildComponentActivationDescription(
 			...idField,
 			displayOptions: { show: showOnlyForResourceWithId },
 		},
-		...buildGetManyPaginationFields(showOnlyForGetAll),
-		buildFieldsCollection(showOnlyForCreate),
+				...buildGetManyPaginationFields(showOnlyForGetAll),
+		catalogRefField,
+		buildFieldsCollection(showOnlyForCreate, false),
 		{
 			displayName:
 				'This is a partial update (PATCH) — only fields added below are sent, everything else on the existing record is left untouched.',
@@ -234,6 +258,6 @@ export function buildComponentActivationDescription(
 			default: '',
 			displayOptions: { show: showOnlyForUpdate },
 		},
-		buildFieldsCollection(showOnlyForUpdate),
+				buildFieldsCollection(showOnlyForUpdate, true),
 	];
 }
