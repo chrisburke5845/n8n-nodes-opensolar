@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-opensolar",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "n8n community node for OpenSolar",
 	"license": "MIT",
 	"homepage": "https://github.com/chrisburke5845/n8n-nodes-opensolar#readme",
