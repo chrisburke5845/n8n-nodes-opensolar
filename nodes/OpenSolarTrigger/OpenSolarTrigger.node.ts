@@ -32,7 +32,7 @@ export class OpenSolarTrigger implements INodeType {
 		defaults: {
 			name: 'OpenSolar Trigger',
 		},
-		usableAsTool: true,
+		usableAsTool: false,
 		inputs: [],
 		outputs: [NodeConnectionTypes.Main],
 		credentials: [
